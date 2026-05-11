@@ -1,5 +1,13 @@
 # Pet Management System
 
+<br>
+
+<div align="center">
+  <strong>🇷🇺 Русский</strong> &nbsp;|&nbsp; <a href="README.md">🇺🇸 English</a>
+</div>
+
+<br>
+
 Система управления питомцами (котиками) и их владельцами. Проект эволюционировал от простого CRUD‑приложения на Hibernate до микросервисной архитектуры с асинхронным общением через Kafka и ролевой авторизацией (JWT).
 
 **Репозиторий:** [https://github.com/capitlgdtt/Pet-Management-System](https://github.com/capitlgdtt/Pet-Management-System)

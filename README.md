@@ -62,62 +62,62 @@ Authentication – JWT. After login, the client receives a token and sends it in
 ### Authentication
 
 #### Register (creates a USER)
-%%%CODE_START_BASH%%%
+```bash
 curl -X POST http://localhost:8080/auth/sign-up \
   -H "Content-Type: application/json" \
   -d '{"username":"user1","password":"pass"}'
-%%%CODE_END%%%
+```
 
 #### Login
-%%%CODE_START_BASH%%%
+```bash
 curl -X POST http://localhost:8080/auth/sign-in \
   -H "Content-Type: application/json" \
   -d '{"username":"user1","password":"pass"}'
 # Response: {"token":"..."}
-%%%CODE_END%%%
+```
 
 ### Cats (token required)
 
 #### Create a cat (USER – owner will be assigned automatically)
-%%%CODE_START_BASH%%%
+```bash
 curl -X POST http://localhost:8080/cats \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{"name":"Barsik","breed":"Siamese","color":"Ginger","tailLength":25}'
-%%%CODE_END%%%
+```
 
 #### Get a cat by ID
-%%%CODE_START_BASH%%%
+```bash
 curl http://localhost:8080/cats/1 -H "Authorization: Bearer <token>"
-%%%CODE_END%%%
+```
 
 #### Get all cats filtered by color
-%%%CODE_START_BASH%%%
+```bash
 curl "http://localhost:8080/cats/color?color=Ginger" -H "Authorization: Bearer <token>"
-%%%CODE_END%%%
+```
 
 ### Owners (ADMIN only)
 
 #### Create an owner
-%%%CODE_START_BASH%%%
+```bash
 curl -X POST http://localhost:8080/owners \
   -H "Authorization: Bearer <admin_token>" \
   -H "Content-Type: application/json" \
   -d '{"username":"newowner","password":"pass","role":"ROLE_USER"}'
-%%%CODE_END%%%
+```
 
 #### Get an owner by ID
-%%%CODE_START_BASH%%%
+```bash
 curl http://localhost:8080/owners/1 -H "Authorization: Bearer <admin_token>"
-%%%CODE_END%%%
+```
 
 #### Update an owner (ADMIN only)
-%%%CODE_START_BASH%%%
+```bash
 curl -X PUT http://localhost:8080/owners/1 \
   -H "Authorization: Bearer <admin_token>" \
   -H "Content-Type: application/json" \
   -d '{"username":"updatedname","role":"ROLE_USER"}'
-%%%CODE_END%%%
+```
 
 ## 🧪 Testing
 
@@ -130,22 +130,22 @@ curl -X PUT http://localhost:8080/owners/1 \
 ## 📦 Local Setup
 
 1. **Start infrastructure** (PostgreSQL, Kafka, ZooKeeper) using Docker Compose:
-   %%%CODE_START_BASH%%%
+   ```bash
    docker-compose up -d
-   %%%CODE_END%%%
+   ```
    The `docker-compose.yml` file is in the project root.
 
 2. **Build the project**:
-   %%%CODE_START_BASH%%%
+   ```bash
    mvn clean package
-   %%%CODE_END%%%
+   ```
 
 3. **Run microservices (order does not matter)**:
-   %%%CODE_START_BASH%%%
+   ```bash
    java -jar api-gateway/target/api-gateway-1.0-SNAPSHOT.jar
    java -jar cats/target/cats-1.0-SNAPSHOT.jar
    java -jar owners/target/owners-1.0-SNAPSHOT.jar
-   %%%CODE_END%%%
+   ```
 
 4. **Swagger UI**:
    > `http://localhost:8080/swagger-ui.html`
